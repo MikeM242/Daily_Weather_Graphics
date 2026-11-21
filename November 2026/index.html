@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Daily Weather Graphics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      background-color: #ffffff; /* Swapped sky blue for a clean white background */
+    }
+    select {
+      padding: 16px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    #content {
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      padding: 15px;
+      min-height: 400px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #fcfcfc;
+    }
+    /* Controls weather chart dimensions safely */
+    .weather-chart {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h2>View Daily Weather Graphcs</h2>
+
+  <select id="daySelector" onchange="loadPage()">
+    <option value="">-- Select a Day --</option>
+    <option value="weather_2026-11-01.png">November 1</option>
+    <option value="weather_2026-11-02.png">November 2</option>
+    <option value="weather_2026-11-03.png">November 3</option>
+    <option value="weather_2026-11-04.png">November 4</option>
+    <option value="weather_2026-11-05.png">November 5</option>
+    <option value="weather_2026-11-06.png">November 6</option>
+    <option value="weather_2026-11-07.png">November 7</option>
+    <option value="weather_2026-11-08.png">November 8</option>
+    <option value="weather_2026-11-00.png">November 9</option>
+    <option value="weather_2026-11-10.png">November 10</option>
+    <option value="weather_2026-11-11.png">November 11</option>
+    <option value="weather_2026-11-12.png">November 12</option>
+    <option value="weather_2026-11-13.png">November 13</option>
+    <option value="weather_2026-11-14.png">November 14</option>
+    <option value="weather_2026-11-15.png">November 15</option>
+    <option value="weather_2026-11-16.png">November 16</option>
+    <option value="weather_2026-11-17.png">November 17</option>
+    <option value="weather_2026-11-18.png">November 18</option>
+    <option value="weather_2026-11-19.png">November 19</option>
+    <option value="weather_2026-11-20.png">November 20</option>
+    <option value="weather_2026-11-21.png">November 21</option>
+    <option value="weather_2026-11-22.png">November 22</option>
+    <option value="weather_2026-11-23.png">November 23</option>
+    <option value="weather_2026-11-24.png">November 24</option>
+    <option value="weather_2026-11-25.png">November 25</option>
+    <option value="weather_2026-11-26.png">November 26</option>
+    <option value="weather_2026-11-27.png">November 27</option>
+    <option value="weather_2026-11-28.png">November 28</option>
+    <option value="weather_2026-11-29.png">November 29</option>
+    <option value="weather_2026-11-30.png">November 30</option>
+    
+  </select>
+
+  <div id="content">
+    <p>Please select a day to load its data.</p>
+  </div>
+
+  <script>
+    function loadPage() {
+      const selector = document.getElementById('daySelector');
+      const file = selector.value;
+      const contentDiv = document.getElementById('content');
+
+      if (!file) {
+        contentDiv.innerHTML = "<p>Please select a day to load its data.</p>";
+        return;
+      }
+
+      // Replaced the network fetch with a native image tag implementation
+      contentDiv.innerHTML = `<img src="${file}" class="weather-chart" alt="Weather Chart for ${selector.options[selector.selectedIndex].text}" />`;
+    }
+  </script>
+</body>
+</html>
