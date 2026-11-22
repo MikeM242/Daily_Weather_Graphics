@@ -28,7 +28,42 @@ jobs:
       - name: Prepare artifact
         run: |
           mkdir -p _site
-          cp -r *" 20"[0-9][0-9] _site/
+          cp -r *-20[0-9][0-9] _site/
+
+          cat << 'EOF' > _site/index.html
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Monthly Archive</title>
+            <style>
+              body { font-family: system-ui, sans-serif; max-width: 600px; margin: 3rem auto; padding: 0 1rem; line-height: 1.6; }
+              h1 { border-bottom: 1px solid #ddd; padding-bottom: 0.5rem; }
+              ul { list-style: none; padding: 0; }
+              li { margin: 0.75rem 0; }
+              a { color: #0969da; text-decoration: none; font-size: 1.1rem; }
+              a:hover { text-decoration: underline; }
+            </style>
+          </head>
+          <body>
+            <h1>Monthly Pages</h1>
+            <ul>
+          EOF
+
+          for dir in _site/*-20[0-9][0-9]; do
+            name=$(basename "$dir")
+            label="${name/-/ }"
+            echo "    <li><a href=\"./$name/\">$label</a></li>" >> _site/index.html
+          done
+
+          cat << 'EOF' >> _site/index.html
+            </ul>
+          </body>
+          </html>
+          EOF
+
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
